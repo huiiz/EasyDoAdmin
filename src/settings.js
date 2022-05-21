@@ -1,6 +1,6 @@
 module.exports = {
 
-  title: 'Vue Admin Template',
+  title: '易睹|EasyDo 后台管理中心',
 
   /**
    * @type {boolean} true | false

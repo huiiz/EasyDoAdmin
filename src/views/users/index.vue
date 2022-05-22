@@ -1,5 +1,4 @@
 <template>
-
   <div class="app-container">
     <el-dialog title="生成邀请码" :visible.sync="dialogVisible" width="30%" :before-close="handleClose">
       <template>
@@ -64,8 +63,12 @@
         <template slot-scope="scope">
           <el-button type="primary" size="small" icon="el-icon-edit"
             @click="dialogVisible = true; invite_uid = scope.row.id"> 生成邀请码 </el-button>
-          <el-button type="primary" size="small" icon="el-icon-edit" :disabled="scope.row.manager_type >= 0" @click="allow(scope.row.id, scope.row.username)"> 同意 </el-button>
-          <el-button type="primary" size="small" icon="el-icon-edit" :disabled="scope.row.manager_type == 0 || scope.row.manager_type == 1" @click="refuse(scope.row.id, scope.row.username)"> {{scope.row.manager_type > 0 ? '撤销权限' : '拒绝'}} </el-button>
+          <el-button type="primary" size="small" icon="el-icon-edit" :disabled="scope.row.manager_type >= 0"
+            @click="allow(scope.row.id, scope.row.username)"> 同意 </el-button>
+          <el-button type="primary" size="small" icon="el-icon-edit"
+            :disabled="scope.row.manager_type == 0 || scope.row.manager_type == 1"
+            @click="refuse(scope.row.id, scope.row.username)"> {{ scope.row.manager_type > 0 ? '撤销权限' : '拒绝' }}
+          </el-button>
         </template>
       </el-table-column>
     </el-table>
@@ -137,17 +140,17 @@ export default {
         this.invite_code = response.data.invite
       })
     },
-    allow(uid, username)  {
+    allow(uid, username) {
       changeType({
         allow: '1',
         username
       }, uid).then(response => {
         this.$message('已成为管理员');
-      this.getList()
+        this.getList()
 
       })
     },
-    refuse(uid, username)  {
+    refuse(uid, username) {
       changeType({
         allow: '0',
         username
